@@ -1,73 +1,57 @@
-""" Создать базу данных для преподавателей и студентов, с возможностью добавления, просмотра и редактирования данных"""
-import pymysql
+""" Создать базу данных для преподавателей и студентов, с возможностью добавления, просмотра и редактирования данных,
+пароль необходимо шифровать"""
 
-databaseServerIP = "127.0.0.1"  # IP address of the MySQL database server
+"""import pymysql
+from pymysql.cursors import DictCursor
 
-databaseUserName = "root"  # User name of the database server
 
-databaseUserPassword = ""  # Password for the database user
+class DataBase:
+    def __init__(self):
+        self.connection = self.connect()
+        self.cursors = self.connection.cursor()
 
-newDatabaseName = "CreateHrenb"  # Name of the database that is to be created
+    def connect(self):
+        connection = pymysql.connect(
+            host='localhost',
+            user='admin',
+            password='qwerty123',
+            db='un',
+            charset='utf8mb4',
+            cursorclass=DictCursor
+        )
+        return connection
 
-charSet = "utf8mb4"  # Character set
-
-cusrorType = pymysql.cursors.DictCursor
-
-connectionInstance = pymysql.connect(host=databaseServerIP, user=databaseUserName, password=databaseUserPassword,
-
-                                     charset=charSet, cursorclass=cusrorType)
-
-try:
-
-    # Create a cursor object
-
-    cursorInsatnce = connectionInstance.cursor()
-
-    # SQL Statement to create a database
-
-    sqlStatement = "CREATE DATABASE " + newDatabaseName
-
-    # Execute the create database SQL statment through the cursor instance
-
-    cursorInsatnce.execute(sqlStatement)
-
-    # SQL query string
-
-    sqlQuery = "SHOW DATABASES"
-
-    # Execute the sqlQuery
-
-    cursorInsatnce.execute(sqlQuery)
-
-    # Fetch all the rows
-
-    databaseList = cursorInsatnce.fetchall()
-
-    for datatbase in databaseList:
-        print(datatbase)
+    def addUser(self, login, password):
+        sql = "INSERT INTO users (id, login, password) VALUES (%s, %s, %s)"
+        temp = [3, login, password]
+        self.cursors.execute(sql, temp)
+        self.connection.commit()""""
 
 
 
-except Exception as e:
 
-    print("Exeception occured:{}".format(e))
-
-
-
-finally:
-
-    connectionInstance.close()
 # Start
 print(" Добро пожаловать в систему")
 
 enter = input (" Нажмите 1 для входа в систему или 2 для регистрации ")
-while True:
+'''while True:
     if enter =="1":
         pass
     elif enter =="2":
         pass
     else:
-        break
+        break'''
+
+def password():
+    while True:
+        login = input(' Введите логин (не менее 6 символов)')
+        if len(login) < 6:
+            print(" Пароль должен быть больше 6 символов")
+        else:
+
+    password = input(" Введите пароль (не менее 6 символов)")
+
+
 
 def registr():
     type = input(" Если Вы преподаватель, нажмите 1, если студент нажмите 2 ")
